@@ -44,7 +44,7 @@ public class ParkingSpotController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ParkingSpotModel>>  findAll(@PageableDefault(size = 15, sort = {"parkingSpotNumber"}, direction = Sort.Direction.ASC) Pageable pagination){
+    public ResponseEntity<Page<ParkingSpotModel>>  findAll(@PageableDefault(page=0, size = 15, sort = {"parkingSpotNumber"}, direction = Sort.Direction.ASC) Pageable pagination){
        Page list = parkingSpotService.findAll(pagination);
 
         return ResponseEntity.ok().body(list);
