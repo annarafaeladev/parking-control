@@ -48,4 +48,14 @@ public class ParkingSpotService {
 
         return parkingSpot.get();
     }
+
+    @Transactional
+    public void delete(UUID id) {
+        var parkingSpot = parkingSpotRepository.findById(id);
+
+        if (!parkingSpot.isPresent())
+            throw  new ValidationException("Cancel op: delete. Parking Spot id Not found");
+
+        parkingSpotRepository.delete(parkingSpot.get());
+    }
 }

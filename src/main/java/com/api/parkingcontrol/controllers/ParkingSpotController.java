@@ -57,4 +57,11 @@ public class ParkingSpotController {
 
        return ResponseEntity.ok(parkingSpot);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity  delete(@PathVariable(value = "id") UUID id){
+        parkingSpotService.delete(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }

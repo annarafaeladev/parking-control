@@ -35,7 +35,7 @@ public class ErrorsExceptionValidation {
 
     @ExceptionHandler(ValidationException.class)
     public ResponseEntity handleCustomMessageBadRequest(ValidationException e) {
-        return ResponseEntity.badRequest().body(new ErrorMessageDto(e.getMessage()));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessageDto(e.getMessage()));
     }
 
     private record ErrorDto(String field, String message){
