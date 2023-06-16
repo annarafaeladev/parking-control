@@ -40,4 +40,11 @@ public class ParkingSpotController {
 
         return ResponseEntity.created(uri).body(parkingSpotService.save(parkingSpotModel));
     }
+
+    @GetMapping
+    public ResponseEntity<Page<ParkingSpotModel>>  findAll(@PageableDefault(size = 15, sort = {"parkingSpotNumber"}, direction = Sort.Direction.ASC) Pageable pagination){
+       Page list = parkingSpotService.findAll(pagination);
+
+        return ResponseEntity.ok().body(list);
+    }
 }
