@@ -1,6 +1,6 @@
 package com.api.parkingcontrol.models;
 
-import com.api.parkingcontrol.dtos.ParkingSpotDto;
+import com.api.parkingcontrol.dtos.ParkingSpotCreateDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,7 +41,7 @@ public class ParkingSpotModel implements Serializable {
     @Column(nullable = false, length = 30)
     private String block;
 
-    public ParkingSpotModel(ParkingSpotDto parkingSpotDto){
+    public ParkingSpotModel(ParkingSpotCreateDto parkingSpotDto){
         this.parkingSpotNumber = parkingSpotDto.parkingSpotNumber();
         this.licensePlateCar = parkingSpotDto.licensePlateCar();
         this.brandCar = parkingSpotDto.brandCar();

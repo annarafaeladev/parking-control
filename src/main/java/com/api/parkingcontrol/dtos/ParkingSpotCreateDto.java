@@ -2,7 +2,7 @@ package com.api.parkingcontrol.dtos;
 
 import jakarta.validation.constraints.*;
 
-public record ParkingSpotDto(
+public record ParkingSpotCreateDto(
         @NotBlank
         String parkingSpotNumber,
         @NotBlank

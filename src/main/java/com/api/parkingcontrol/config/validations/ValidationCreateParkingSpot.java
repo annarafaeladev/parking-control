@@ -1,8 +1,8 @@
 package com.api.parkingcontrol.config.validations;
 
-import com.api.parkingcontrol.dtos.ParkingSpotDto;
+import com.api.parkingcontrol.dtos.ParkingSpotCreateDto;
 
 public interface ValidationCreateParkingSpot {
 
-    String validation(ParkingSpotDto parkingSpotDto);
+    String validation(ParkingSpotCreateDto parkingSpotDto);
 }

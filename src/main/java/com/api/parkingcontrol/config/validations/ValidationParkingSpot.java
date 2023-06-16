@@ -1,6 +1,6 @@
 package com.api.parkingcontrol.config.validations;
 
-import com.api.parkingcontrol.dtos.ParkingSpotDto;
+import com.api.parkingcontrol.dtos.ParkingSpotCreateDto;
 import com.api.parkingcontrol.services.ParkingSpotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +12,7 @@ public class ValidationParkingSpot implements  ValidationCreateParkingSpot{
     private ParkingSpotService parkingSpotService;
 
     @Override
-    public String validation(ParkingSpotDto parkingSpotDto) {
+    public String validation(ParkingSpotCreateDto parkingSpotDto) {
         if(parkingSpotService.existsByLicensePlateCar(parkingSpotDto.licensePlateCar())){
             return "Conflict: License Plate Car is already in use!";
         }
