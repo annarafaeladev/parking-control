@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
+import java.util.Optional;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/parking-spot")
@@ -46,5 +48,13 @@ public class ParkingSpotController {
        Page list = parkingSpotService.findAll(pagination);
 
         return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Object>  findOne(@PathVariable(value = "id") UUID id){
+       var parkingSpot = parkingSpotService.findOne(id);
+
+       return ResponseEntity.ok(parkingSpot);
     }
 }

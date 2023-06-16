@@ -33,9 +33,16 @@ public class ErrorsExceptionValidation {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " +ex.getLocalizedMessage());
     }
 
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity handleCustomMessageBadRequest(ValidationException e) {
+        return ResponseEntity.badRequest().body(new ErrorMessageDto(e.getMessage()));
+    }
+
     private record ErrorDto(String field, String message){
         public ErrorDto(FieldError error) {
             this(error.getField(), error.getDefaultMessage());
         }
     }
+
+    private record ErrorMessageDto(String error){}
 }
