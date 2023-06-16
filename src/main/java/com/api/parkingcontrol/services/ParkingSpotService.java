@@ -1,8 +1,10 @@
 package com.api.parkingcontrol.services;
 
 import com.api.parkingcontrol.config.exceptions.ValidationException;
+import com.api.parkingcontrol.dtos.ParkingSpotCreateDto;
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.repositories.ParkingSpotRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,5 +59,23 @@ public class ParkingSpotService {
             throw  new ValidationException("Cancel op: delete. Parking Spot id Not found");
 
         parkingSpotRepository.delete(parkingSpot.get());
+    }
+
+
+    @Transactional
+    public ParkingSpotModel update(UUID id, ParkingSpotCreateDto data) {
+        var parkingSpotDb = parkingSpotRepository.findById(id);
+
+        if (!parkingSpotDb.isPresent())
+            throw  new ValidationException("Cancel op: update. Parking Spot id Not found");
+
+        var parkingSpotModel = new ParkingSpotModel();
+        BeanUtils.copyProperties(data, parkingSpotModel);
+        parkingSpotModel.setId(parkingSpotDb.get().getId());
+        parkingSpotModel.setRegistrationDate(parkingSpotDb.get().getRegistrationDate());
+
+        parkingSpotRepository.save(parkingSpotModel);
+
+        return parkingSpotModel;
     }
 }

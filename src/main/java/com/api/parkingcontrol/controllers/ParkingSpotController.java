@@ -64,4 +64,12 @@ public class ParkingSpotController {
 
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<ParkingSpotModel>  update(@PathVariable(value = "id") UUID id, @RequestBody @Valid ParkingSpotCreateDto data){
+        var parkingSpot = parkingSpotService.update(id, data);
+
+        return ResponseEntity.ok().body(parkingSpot);
+    }
 }
