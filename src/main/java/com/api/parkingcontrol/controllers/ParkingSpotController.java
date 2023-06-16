@@ -1,16 +1,19 @@
 package com.api.parkingcontrol.controllers;
 
 import com.api.parkingcontrol.config.validations.ValidationCreateParkingSpot;
-import com.api.parkingcontrol.dtos.ParkingSpotDto;
+import com.api.parkingcontrol.dtos.ParkingSpotCreateDto;
 import com.api.parkingcontrol.models.ParkingSpotModel;
 import com.api.parkingcontrol.services.ParkingSpotService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import java.net.URI;
 
 @RestController
@@ -25,7 +28,7 @@ public class ParkingSpotController {
     private ValidationCreateParkingSpot validationCreateParkingSpot;
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody @Valid ParkingSpotDto parkingSpotDto, UriComponentsBuilder uriComponentsBuilder){
+    public ResponseEntity<Object> create(@RequestBody @Valid ParkingSpotCreateDto parkingSpotDto, UriComponentsBuilder uriComponentsBuilder){
         var messageError = validationCreateParkingSpot.validation(parkingSpotDto);
 
         if (messageError != null){
@@ -37,5 +40,4 @@ public class ParkingSpotController {
 
         return ResponseEntity.created(uri).body(parkingSpotService.save(parkingSpotModel));
     }
-
 }
